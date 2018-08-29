@@ -56,7 +56,7 @@ class ContactInfo
      */
     public function getName(): string
     {
-        return $this->name;
+        return (string)$this->name;
     }
 
     /**
@@ -74,7 +74,7 @@ class ContactInfo
      */
     public function getMail(): string
     {
-        return $this->mail;
+        return (string)$this->mail;
     }
 
     /**
@@ -92,7 +92,7 @@ class ContactInfo
      */
     public function getPhoneNumber(): string
     {
-        return $this->phoneNumber;
+        return (string)$this->phoneNumber;
     }
 
     /**
@@ -110,7 +110,7 @@ class ContactInfo
      */
     public function getMessage(): string
     {
-        return $this->message;
+        return (string)$this->message;
     }
 
     /**
@@ -128,7 +128,7 @@ class ContactInfo
      */
     public function getIpAddress(): string
     {
-        return $this->ipAddress;
+        return (string)$this->ipAddress;
     }
 
     /**

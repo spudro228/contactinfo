@@ -33,6 +33,12 @@ class ContactInfoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($request->getClientIp() === null){
+                //todo: выводить шаблон с ошибкой
+                throw new \Exception("Net IPshinka");
+            }
+
+            $contactInfo->setIpAddress($request->getClientIp());
             $em = $this->getDoctrine()->getManager();
             $em->persist($contactInfo);
             $em->flush();
@@ -79,7 +85,7 @@ class ContactInfoController extends Controller
      */
     public function delete(Request $request, ContactInfo $contactInfo): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$contactInfo->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $contactInfo->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($contactInfo);
             $em->flush();
