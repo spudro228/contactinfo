@@ -23,7 +23,7 @@
                 <td>{{ contact_info.id }}</td>
                 <td>{{ contact_info.name }}</td>
                 <td>{{ contact_info.mail }}</td>
-                <td>{{ contact_info.phoneNumber }}</td>
+                <td>{{ contact_info.phoneNumber|phone_number_format('NATIONAL') }}</td>
                 <td>{{ contact_info.message }}</td>
                 <td>{{ contact_info.ipAddress }}</td>
                 <td>

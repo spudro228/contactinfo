@@ -9,3 +9,16 @@
 
     <a href="{{ path('contact_info_index') }}">back to list</a>
 {% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/imask"></script>
+    <script type="text/javascript">
+        let element = document.getElementById('contact_info_phoneNumber');
+        let maskOptions = {
+            mask: '+{7}(000)000-00-00'
+        };
+        let mask = new IMask(element, maskOptions);
+    </script>
+{% endblock %}

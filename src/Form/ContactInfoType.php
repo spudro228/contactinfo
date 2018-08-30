@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\ContactInfo;
+use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -21,8 +22,9 @@ class ContactInfoType extends AbstractType
             ->add('mail', EmailType::class, [
                 'required' => true,
             ])
-            ->add('phoneNumber', TelType::class, [
+            ->add('phoneNumber', PhoneNumberType::class, [
                 'required' => true,
+                'preferred_country_choices' => ['RU'],
             ])
             ->add('message', TextType::class, [
                 'required' => true,

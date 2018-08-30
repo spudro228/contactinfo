@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use libphonenumber\PhoneNumber;
+use Symfony\Component\Validator\Constraints as Assert;
+use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContactInfoRepository")
@@ -17,32 +20,39 @@ class ContactInfo
     private $id;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
-     * @var string
+     * @var string|null
      */
     protected $name;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Email()
      * @ORM\Column(type="string")
-     * @var string
+     * @var string|null
      */
     protected $mail;
 
     /**
-     * @ORM\Column(type="string")
-     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(type="phone_number")
+     * @var PhoneNumber|null
      */
     protected $phoneNumber;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="text", length=1000)
-     * @var string
+     * @var string|null
      */
     protected $message;
 
     /**
+     * @AssertPhoneNumber(type="mobile")
+     * @Assert\IsNull()
      * @ORM\Column(type="string")
-     * @var string
+     * @var string|null
      */
     protected $ipAddress;
 
@@ -52,90 +62,90 @@ class ContactInfo
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
-        return (string)$this->name;
+        return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param null|string $name
      * @return ContactInfo
      */
-    public function setName(string $name): ContactInfo
+    public function setName(?string $name): ContactInfo
     {
         $this->name = $name;
         return $this;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getMail(): string
+    public function getMail(): ?string
     {
-        return (string)$this->mail;
+        return $this->mail;
     }
 
     /**
-     * @param string $mail
+     * @param null|string $mail
      * @return ContactInfo
      */
-    public function setMail(string $mail): ContactInfo
+    public function setMail(?string $mail): ContactInfo
     {
         $this->mail = $mail;
         return $this;
     }
 
     /**
-     * @return string
+     * @return null|PhoneNumber
      */
-    public function getPhoneNumber(): string
+    public function getPhoneNumber(): ?PhoneNumber
     {
-        return (string)$this->phoneNumber;
+        return $this->phoneNumber;
     }
 
     /**
-     * @param string $phoneNumber
+     * @param null|PhoneNumber $phoneNumber
      * @return ContactInfo
      */
-    public function setPhoneNumber(string $phoneNumber): ContactInfo
+    public function setPhoneNumber(?PhoneNumber $phoneNumber): ContactInfo
     {
         $this->phoneNumber = $phoneNumber;
         return $this;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getMessage(): string
+    public function getMessage(): ?string
     {
-        return (string)$this->message;
+        return $this->message;
     }
 
     /**
-     * @param string $message
+     * @param null|string $message
      * @return ContactInfo
      */
-    public function setMessage(string $message): ContactInfo
+    public function setMessage(?string $message): ContactInfo
     {
         $this->message = $message;
         return $this;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getIpAddress(): string
+    public function getIpAddress(): ?string
     {
-        return (string)$this->ipAddress;
+        return $this->ipAddress;
     }
 
     /**
-     * @param string $ipAddress
+     * @param null|string $ipAddress
      * @return ContactInfo
      */
-    public function setIpAddress(string $ipAddress): ContactInfo
+    public function setIpAddress(?string $ipAddress): ContactInfo
     {
         $this->ipAddress = $ipAddress;
         return $this;
