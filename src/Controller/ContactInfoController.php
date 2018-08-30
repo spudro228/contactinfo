@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ContactInfo;
 use App\Form\ContactInfoType;
 use App\Repository\ContactInfoRepository;
+use Enqueue\Client\ProducerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,23 +26,31 @@ class ContactInfoController extends Controller
 
     /**
      * @Route("/new", name="contact_info_new", methods="GET|POST")
+     * @param Request $request
+     * @param ProducerInterface $producer
+     * @return Response
+     * @throws \Exception
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ProducerInterface $producer): Response
     {
         $contactInfo = new ContactInfo();
         $form = $this->createForm(ContactInfoType::class, $contactInfo);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($request->getClientIp() === null){
-                //todo: выводить шаблон с ошибкой
-                throw new \Exception("Net IPshinka");
+            if ($request->getClientIp() === null) {
+                return $this->render('contact_info/ipAddressError.html.twig');
             }
 
             $contactInfo->setIpAddress($request->getClientIp());
             $em = $this->getDoctrine()->getManager();
             $em->persist($contactInfo);
             $em->flush();
+
+            $producer->sendCommand(
+                'aSendContactInfoToAdminProcessor',
+                $this->renderView('contact_info/email.html.twig', ['contactInfo' => $contactInfo])
+            );
 
             return $this->redirectToRoute('contact_info_index');
         }

@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>PhoneNumber</th>
-                <td>{{ contact_info.phoneNumber }}</td>
+                <td>{{ contact_info.phoneNumber|phone_number_format('NATIONAL') }}</td>
             </tr>
             <tr>
                 <th>Message</th>
