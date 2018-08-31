@@ -5,39 +5,42 @@
 {% block body %}
     <h1>ContactInfo index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Mail</th>
-                <th>PhoneNumber</th>
-                <th>Message</th>
-                <th>IpAddress</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for contact_info in contact_infos %}
-            <tr>
-                <td>{{ contact_info.id }}</td>
-                <td>{{ contact_info.name }}</td>
-                <td>{{ contact_info.mail }}</td>
-                <td>{{ contact_info.phoneNumber|phone_number_format('NATIONAL') }}</td>
-                <td>{{ contact_info.message }}</td>
-                <td>{{ contact_info.ipAddress }}</td>
-                <td>
-                    <a href="{{ path('contact_info_show', {'id': contact_info.id}) }}">show</a>
-                    <a href="{{ path('contact_info_edit', {'id': contact_info.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="content">
+        <div class="content__items">
+            <table class="table pure-table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Mail</th>
+                    <th>PhoneNumber</th>
+                    <th>Message</th>
+                    <th>IpAddress</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for contact_info in contact_infos %}
+                    <tr>
+                        <td>{{ contact_info.id }}</td>
+                        <td>{{ contact_info.name }}</td>
+                        <td>{{ contact_info.mail }}</td>
+                        <td>{{ contact_info.phoneNumber|phone_number_format('NATIONAL') }}</td>
+                        <td>{{ contact_info.message }}</td>
+                        <td>{{ contact_info.ipAddress }}</td>
+                        <td>
+                            <a class="pure-button" href="{{ path('contact_info_show', {'id': contact_info.id}) }}">show</a>
+                            <a class="pure-button" href="{{ path('contact_info_edit', {'id': contact_info.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a class="pure-button pure-button-primary" style="margin-top: 20px" href="{{ path('contact_info_new') }}">Create new</a></div>
+    </div>
 
-    <a href="{{ path('contact_info_new') }}">Create new</a>
 {% endblock %}

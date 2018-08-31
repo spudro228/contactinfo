@@ -6,11 +6,35 @@
 
         {% block stylesheets %}
             <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+            <style>
+                h1{
+                    text-align: center;
+                }
+                .content{
+                    display: flex;
+                    justify-content: center;
+                }
+                .form-contact-info{
+                    width: 300px;
+                }
+                input{
+                    width: 100%;
+                }
+            </style>
         {% endblock %}
 
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="https://unpkg.com/imask"></script>
+            <script type="text/javascript">
+                let element = document.getElementById('contact_info_phoneNumber');
+                let maskOptions = {
+                    mask: '+{7}(000)000-00-00'
+                };
+                let mask = new IMask(element, maskOptions);
+            </script>
+        {% endblock %}
     </body>
 </html>

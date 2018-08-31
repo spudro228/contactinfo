@@ -2,11 +2,27 @@
 
 {% block title %}ContactInfo{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        .show_button_list{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .content__items{
+            flex-direction: column;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     <h1>ContactInfo</h1>
 
-    <table class="table">
-        <tbody>
+    <div class="content">
+        <div class="content__items"><table class="table pure-table">
+            <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ contact_info.id }}</td>
@@ -31,12 +47,14 @@
                 <th>IpAddress</th>
                 <td>{{ contact_info.ipAddress }}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <a href="{{ path('contact_info_index') }}">back to list</a>
+        <div class="show_button_list">
+            <a class="pure-button" href="{{ path('contact_info_index') }}">Back to list</a>
+            <a class="pure-button pure-button-primary" href="{{ path('contact_info_edit', {'id': contact_info.id}) }}">Edit</a>
+            {{ include('contact_info/_delete_form.html.twig') }}
+        </div></div>
 
-    <a href="{{ path('contact_info_edit', {'id': contact_info.id}) }}">edit</a>
-
-    {{ include('contact_info/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

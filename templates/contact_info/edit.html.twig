@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit ContactInfo</h1>
 
-    {{ include('contact_info/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="content">
+        {{ include('contact_info/_form.html.twig', {'button_label': 'Update', 'delete_button_enable' : true}) }}
+    </div>
 
-    <a href="{{ path('contact_info_index') }}">back to list</a>
 
-    {{ include('contact_info/_delete_form.html.twig') }}
 {% endblock %}
