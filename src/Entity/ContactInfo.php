@@ -50,7 +50,6 @@ class ContactInfo
 
     /**
      * @AssertPhoneNumber(type="mobile")
-     * @Assert\IsNull()
      * @ORM\Column(type="string")
      * @var string|null
      */
