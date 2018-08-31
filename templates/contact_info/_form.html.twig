@@ -1,6 +1,8 @@
-{{ form_start(form) }}
+{{ form_start(form, { 'attr': {'class': 'pure-form pure-form-stacked form-contact-info'} }) }}
     {{ form_errors(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="pure-button pure-button-primary">{{ button_label|default('Save') }}</button>
+    <a class="pure-button" href="{{ path('contact_info_index') }}">back to list</a>
+
 {{ form_end(form) }}
 
